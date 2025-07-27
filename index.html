@@ -1,36 +1,80 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>The rocking couch potatoes</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Resume</title>
 </head>
-
 <body>
-  <form>
-    <h4>Do You like Rock?</h4>
-    <input type="radio" id="Yes" name="Yes" value="Yes">
-    <label for="Yes">Yes</label><br>
-    <input type="radio" id="No" name="Yes" value="No">
-    <label for="No">No</label><br>
-  </form>
-  <h3>Well who cares?!</h3>
-  <h3>You're gonna love this band anyway!</h3>
-  <h3>They're the best band ever!</h3>
-  <h4>Why?</h4>
-  <ul>
-    <li>We have the best band-members ever!</li>
-    <li>Great name</li>
-    <li>Rocking songs that'll blow off your mind!🤯</li>
-  </ul>
-  <h1>🥁🎹THE ROCKING COUCH POTATOES!!!!!</h1>
-  <img src="images/couch-potato.png" alt="Couch Potato" width="15%" height="15%"">
-  <h3 >recitals: </h3>
-  <ul>
-    <li>somewhere -- IDK</li>
-  </ul>
+
+<h1>Summary</h1>
+Embedded Software and Signal Processing Engineer with 11+ years of experience developing best‑in‑class solutions for Industrial/Automotive
+applications. Worked on a multitude of projects, from writing assembly‑optimized DSP and Math libraries to custom end‑applications for tier‑1
+OEMs. In‑depth knowledge of ARM architectures and radio IP were pivotal in the design of a complex, proprietary, low‑power wireless protocol for
+deployment in EV battery packs. Independent minded go‑getter who is passionate about working with driven people on exciting projects.
+
+<h1>Work Experience</h1>
+<b>Cirrus Logic</b><br>
+<b>Firmware Engineer</b> <i>2022 ‑ Present</i>
+<ul>
+<li> Developed production quality code for a series of audio codecs, for the PC Audio space, that went on to be adopted into Intel’s reference platform
+for laptop OEMs.</li>
+<li> Implemented a key feature of the MIPI SoundWire Device Class for Audio (SDCA) specification, the Smart Microphone Processing Unit (SMPU)
+that offloaded wakeword detection from the Intel DSP to the SoC; this allowed for a drastic decrease in power usage as the rest of the system
+could sleep while just the SoC listened.</li>
+<li> Created a ”Sidecar” interface that allowed for dissimilar amplifier aggregation where severl of Cirrus’ boosted amplifiers could be hidden behind
+a single audio codec (through SPI control) and presented to the OS as a single entity; the first major SDCA system to make it into a Lenovo.</li>
+</ul>
+
+<b>Texas Instruments</b><br>
+<b>R&D Software Engineer (Connectivity)</b><br>
+<b>MEMBER, GROUP OF TECHNICAL STAFF</b> <i>2017 ‑ 2022</i><br>
+<ul>
+<li> Led the development of the lower MAC for TI’s proprietary Wireless Battery Management Protocol (WBMS): a high throughput, low latency and
+scalable wireless protocol for battery‑monitoring nodes in EVs–currently being used (or under evaluation) by several tier‑1 OEMs.</li>
+<li> Designed WBMS protocol’s power management module to aggressively drive down current consumption (32% below OEM requirements) during
+idle times, prolonging the charge and lifespan of the battery pack.</li>
+<li> Played a critical role in shaping the WBMS protocol and system specification by proposing efficient usage of the radio IP’s built‑in features, a
+robust synchronization algorithm and, power‑efficient modes of operation; filed multiple disclosures in the process.</li>
+<li> Worked across mutli‑functional teams–marketing, analog, systems–to develop a solution that could pass stringent functional safety and auto‑
+motive quality requirements.</li>
+<li> Designed and wrote several of the TI’s SimpleLink (SDK) proprietary examples to showcase the differentiated features of the radio IP, including
+one that could compute packet error rate, RSSI and max/avg throughput (at different power levels) for different packet sizes over multiple
+modulation schemes, like GFSK, LRM, BLE4/5; it has reduced test and validation times by an order of magnitude.</li>
+</ul>
+
+<b>Texas Instruments</b><br>
+<b>Applications Engineer (C2000)</b> <i>2010 ‑ 2017</i>
+<ul>
+<li> Developed algorithms for C2000’s Digital Signal Processing (DSP), Math and Accelerator libraries, prototyping them in MATLAB and C and sub‑
+sequently writing hand optimized assembly; several were used in TI’s SmartGrid offering for Power Line Communication (PLC).</li>
+<li> Technical owner for the C2000 Accelerators (CLA, TMU, VCU, FPU, FPU64) including IP software validation, software library maintenance, devel‑
+oping user’s guides, algorithms, test infrastructure, quality management and errata.</li>
+<li> Strong online (E2E Forum, Mastermind Level) and on‑site engagement with customers to resolve issues.</li>
+<li> Developed first‑in‑class UL 1699B certified DC Arc Detection firmware for solar panel (PV) topologies with the ability to detect arcs in <100 ms.</li>
+</ul>
+
+<b>Automation and Robotics Research Institute (ARRI)</b><br>
+<b>Graduate Research Assistant</b> <i>2009</i><br>
+<ul>
+<li> Completed thesis on Localization System for UAV/UGV in Urban Environments; designed prototype sensors with integrated ultrasonic and RF
+ranging to be used in a MATLAB algorithm that utilized potential fields to create the localization map.</li>
+</ul>
+
+<h1>Education</h1>
+<b>University of Texas at Arlington</b><br>
+<b>Master of Science in Electrical Engineering</b> <i>2006 ‑ 2009</i><br><br>
+
+<b>University of Mumbai, India</b><br>
+<b>Bachelor of Engineering in Electronics and Telecommunications</b> <i>2002 ‑ 2006</i>
+
+<h1>Skills</h1>
+<ul>
+<li>Languages: C, C++, C2000 ASM, ARM ASM, Python and MATLAB</li>
+<li>Embedded Software DSP, Wireless, RTOS, Bare‑Metal</li>
+<li>Protocols and Peripherals SPI, I2C, PMBUS, UART, ADC</li>
+<li>Tools: Keil, Code Composer Studio, Visual Studio, Debug/JTAG, Agile (Git, Atlassian, JFrog, etc.)</li>
+</ul>
+
 </body>
-  
 </html>
