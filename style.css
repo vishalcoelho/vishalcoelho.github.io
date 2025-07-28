@@ -1,26 +1,17 @@
-html {
-    color: white;
-    background-image: url('images/rock-guitar.jpeg');
-    background-repeat: no-repeat;
-    background-size: 100%;
-  }
-  
-  h3 {
-    border-style: dotted;
-    border-color: #bd001c;
-    border-width: 2px ;
-    margin-right: 1800px;
-  }
-  
-  h1 {
-    font-family: "Copperplate", fantasy;
-  }
-  
-  ul {
-  }
-  
-  h4 {
-    text-decoration-line: underline;
-    text-decoration-color: #5700c2;
-    text-size-adjust: 200%;
-  }
+.work-exp-company{
+ color: #687FE5;
+ background-color: #EBD6FB;
+ font-weight: bolder;
+ margin-bottom: 0;
+}
+
+.work-exp-position{
+    color: #FF4F0F;
+    background-color: #FFA673;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+h1 {
+    color: #640D5F;
+}
