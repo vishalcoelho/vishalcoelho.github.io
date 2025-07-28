@@ -5,6 +5,19 @@ html {
   font-style: normal;
 }
 
+#headshot {
+    width: 50%;
+    margin-left: 25%;
+}
+
+img{
+    background-color: #FCF8DD;
+    border: 10px solid #00809D;
+    padding: 0px;
+    margin: 10px;
+    width: 100%;
+}
+
 body {
     font-weight: lighter; /* Lighter than parent (html-font-weight-100) */
 }
@@ -37,4 +50,5 @@ body {
 
 h1 {
     color: #640D5F;
+
 }
