@@ -1,3 +1,26 @@
+html {
+  font-family: "Atkinson Hyperlegible Mono", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: Bold;
+  font-style: normal;
+}
+
+body {
+    font-weight: lighter; /* Lighter than parent (html-font-weight-100) */
+}
+
+.work-exp-dates {
+  font-family: "Bitcount Prop Single", system-ui;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "CRSV" 0.5,
+    "ELSH" 0,
+    "ELXP" 0;
+}
+
 .work-exp-company{
  color: #687FE5;
  background-color: #EBD6FB;
