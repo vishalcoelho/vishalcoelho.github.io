@@ -1,54 +1,79 @@
 html {
-  font-family: "Atkinson Hyperlegible Mono", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: Bold;
-  font-style: normal;
+    font-family: "Atkinson Hyperlegible Mono", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: Bold;
+    font-style: normal;
 }
 
 #headshot {
-    width: 50%;
-    margin-left: 25%;
+    /* If you want it centered on screen at top, uncomment next 2, comment rest */
+    /* width: 50%; */
+    /* margin-left: 25%; */
+    float: left;
+    margin: 0px 20px 20px 0px;
 }
 
-img{
-    background-color: #FCF8DD;
+#headshot>img {
     border: 10px solid #00809D;
     padding: 0px;
-    margin: 10px;
-    width: 100%;
 }
 
 body {
-    font-weight: lighter; /* Lighter than parent (html-font-weight-100) */
+    font-weight: lighter;
+    /* Lighter than parent (html-font-weight-100) */
 }
 
-.work-exp-dates {
-  font-family: "Bitcount Prop Single", system-ui;
-  font-optical-sizing: auto;
-  font-weight: normal;
-  font-style: normal;
-  font-variation-settings:
-    "slnt" 0,
-    "CRSV" 0.5,
-    "ELSH" 0,
-    "ELXP" 0;
+#summary {
+    text-align: justify;
 }
 
-.work-exp-company{
- color: #687FE5;
- background-color: #EBD6FB;
- font-weight: bolder;
- margin-bottom: 0;
+#work-experience {
+    /* Move this under the image by clearing the float property */
+    clear: left;
 }
 
-.work-exp-position{
+.work-exp-company {
+    color: #687FE5;
+    background-color: #EBD6FB;
+    font-weight: bolder;
+    margin-bottom: 0;
+}
+
+.work-exp-position {
     color: #FF4F0F;
     background-color: #FFA673;
     margin-top: 0;
     margin-bottom: 0;
+    display: inline;
 }
 
-h1 {
-    color: #640D5F;
+.work-exp-dates {
+    font-family: "Bitcount Prop Single", system-ui;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+    font-variation-settings:
+        "slnt" 0,
+        "CRSV" 0.5,
+        "ELSH" 0,
+        "ELXP" 0;
+    display: block
+}
+
+@media (max-width: 800px) {
+    #headshot {
+        float: none;
+        text-align: center;
+    }
+
+    #headshot>img {
+        border: 10px solid #00809D;
+        padding: 0px;
+    }
+
+    #summary {
+        clear: left;
+        text-align: unset;
+    }
 
 }
