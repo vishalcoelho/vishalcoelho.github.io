@@ -37,15 +37,9 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7' # Not needed with a .ruby-version file
-      - name: Install dependencies
-        run: |
-          gem install bundler -v 2.4.22
-          bundle install
-      - name: Fix URI gem conflict
-        run: |
-          gem uninstall uri -v 0.10.0
-          gem install uri -v 1.0.3
+          ruby-version: '3.1' # Not needed with a .ruby-version file
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+          cache-version: 0 # Increment this number if you need to re-download cached gems
 
       - name: Setup Pages
         id: pages
