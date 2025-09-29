@@ -4,4 +4,4 @@ permalink: /references/
 author_profile: true
 ---
 
-{% cite coelho2009localization} Masters Thesis
+{% cite coelho2009localization %} Masters Thesis
