@@ -60,7 +60,6 @@ plugins:
   - jekyll-feed
   - jemoji
   - jekyll-include-cache
-  - jekyll-scholar
 
 author:
   name   : "Vishal Coelho"
