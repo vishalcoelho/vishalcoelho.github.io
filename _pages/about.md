@@ -3,6 +3,5 @@ permalink: /about/
 title: "About"
 ---
 
-<object data="/assets/pdfs/resume.pdf" type="application/pdf" width="100%" height="600px">
-    <p>This browser does not support PDFs. <a href="/assets/pdfs/resume.pdf">Download the PDF</a>.</p>
-</object>
+<iframe width="100%" height="100%",
+src="https://drive.google.com/file/d/12d4VXrl6I-cX-_V-hdtDjHzMeD1NgGN9/preview"></iframe>
