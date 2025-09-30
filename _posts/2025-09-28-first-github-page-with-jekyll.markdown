@@ -1,0 +1,100 @@
+---
+layout: post
+title:  "Creating your first GitHub page with Jekyll"
+date:   2025-09-28 21:31:00 -0500
+categories: github jekyll
+---
+# Table of Contents <!-- omit in toc -->
+
+- [Introduction](#introduction)
+- [Installing Ruby and Jekyll](#installing-ruby-and-jekyll)
+- [Create a Blank Repository on GitHub](#create-a-blank-repository-on-github)
+- [Using Jekyll to create a barebones page](#using-jekyll-to-create-a-barebones-page)
+- [Visualizing changes locally](#visualizing-changes-locally)
+
+---
+
+# Introduction
+
+This blog is a compilation of notes I took while going through this [tutorial](https://www.youtube.com/watch?v=fV01b0duZwU) on YouTube on how to build your first website on GirHub with Jekyll.
+
+# Installing Ruby and Jekyll
+1. Go to [Ruby Installer](https://rubyinstaller.org/downloads/) and get the latest installer (including DEVKIT) for Windows.
+2. Run the installation with the default settings; when it asks to install the MSYS toolchain, choose option 3: MSYS and MSYS2. Once the install is done, it'll ask the same set of questions again, hit ENTER to exit.
+3. Since I will be using the bash terminal to run ruby, modify the `.bashrc` to include the newly installed ruby binaries in the system path,
+
+    ```bash
+    export PATH=${PATH}:/c/Ruby34-x64/bin
+    ```
+
+4. run `gem update`.
+5. Install `jekyll` and `bundler`.
+    ```bash
+    $ gem install jekyll bundler
+    ```
+6. run `jekyll -v`, you should get a response like `jekyll 4.4.1`
+
+# Create a Blank Repository on GitHub
+1. Log into your github account
+1. Create a new repository with the following name: `<github_username>.github.io`
+
+![Create a new GitHub Repository][img_create_repo]
+
+# Using Jekyll to create a barebones page
+We are going to force jekyll to create a page in our github webpage repository, `vishalcoelho.github.io` in my case.
+
+1. cd into the root of the repo
+1. Create a new site
+
+    ```bash
+    $ jekyll new --skip-bundle .
+    **Conflict**: C:/Users/savio/repositories/vishalcoelho.github.io exists and is not empty.
+    Ensure C:/Users/savio/repositories/vishalcoelho.github.io is empty or else try again with `--force` to proceed and overwrite any files.
+    ```
+    > :warning: It's complaining about the repo being empty, use `--force`
+
+    ```bash
+    $ jekyll new --skip-bundle . --force
+    New jekyll site installed in C:/Users/savio/repositories/vishalcoelho.github.io.
+    Bundle install skipped.
+    ```
+    <!-- If you want to center an image, you need to use the path (not link) in an img tag, as opposed to -->
+    <!-- ![Jekyll creates a blank project][img_jekyll_blank] -->
+    <img
+        style="display: block;
+               margin-left: auto;
+               margin-right: auto;
+               width = 30%;"
+        src="/docs/images/2025_09_28_post_first_github_page/new_jekyll_creation.png">
+
+1. Edit the *Gemfile*:
+   1. comment `gem "jekyll", "~> 4.4.1"` as GitHub is currently pinned to v3
+   2. Uncomment `gem "github-pages", group: :jekyll_plugins` and add the version for github-pages, which you can fine on [GitHub versions](https://pages.github.com/versions/)
+
+      `gem "github-pages", "~>232", group: :jekyll_plugins`
+   3. Run `bundle install`
+
+        ```bash
+        $ bundle install
+        [DEPRECATED] Platform :mingw, :x64_mingw, :mswin is deprecated. Please use platform :windows instead.
+        Fetching gem metadata from https://rubygems.org/...........
+        Resolving dependencies...
+        ...stuff...
+        Bundle complete! 7 Gemfile dependencies, 100 gems now installed.
+        Use `bundle info [gemname]` to see where a bundled gem is installed.
+        ```
+
+2. Verify changes in `Gemfile.lock` then add this file to `.gitignore`
+
+# Visualizing changes locally
+
+Run `bundle exec jekyll serve` to serve up the site locally, and `Ctrl+C` to shut it down when done live editing.
+
+   ![Host site on local server][img_local_server]
+
+
+
+
+[img_create_repo]: /docs/images/2025_09_28_post_first_github_page/create_repo.png
+[img_jekyll_blank]: /docs/images/2025_09_28_post_first_github_page/new_jekyll_creation.png
+[img_local_server]: /docs/images/2025_09_28_post_first_github_page/serving_site_locally.png
