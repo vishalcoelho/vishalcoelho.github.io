@@ -4,6 +4,9 @@ title:  "Creating your first GitHub page with Jekyll"
 date:   2025-09-28 21:31:00 -0500
 categories: github jekyll
 ---
+<!-- excerpts go here, right after the front matter -->
+Ever wonder how people create blogs and posts in the blink of an eye? Well, now you can too!!! using GitHub pages and Jekyll, create your very first blog in under an hour--well, maybe two--and amaze your friends and family and dog with your new found skills.
+
 # Table of Contents <!-- omit in toc -->
 
 - [Introduction](#introduction)
@@ -11,6 +14,7 @@ categories: github jekyll
 - [Create a Blank Repository on GitHub](#create-a-blank-repository-on-github)
 - [Using Jekyll to create a barebones page](#using-jekyll-to-create-a-barebones-page)
 - [Visualizing changes locally](#visualizing-changes-locally)
+- [Using different themes](#using-different-themes)
 
 ---
 
@@ -93,8 +97,33 @@ Run `bundle exec jekyll serve` to serve up the site locally, and `Ctrl+C` to shu
    ![Host site on local server][img_local_server]
 
 
+# Using different themes
 
+You can find more themes at [GitHub Pages Themes](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll). To use a theme simply edit the _config.yml
+
+1. Change theme from the default `minima` to `jekyll-theme-<theme>`. For example, if i wanted to change to the hacker theme, the line would look like
+
+```theme: jekyll-theme-hacker```
+
+1. This alone isn't sufficient to render locally
+
+![Fail to use theme locally][img_jekyll_serve_fail]
+
+It is complaining about layouts `page`, `home` not existing. `hacker` only supports the `default` and `post` layouts (check the _layout folder in the theme's repository)
+
+So, change all `home` & `page` -> `default`
+
+1. We are missing the links `about`, `contact`, so how do we customize this theme?
+   1. create a new folder `_layouts` where we  will override the theme. Create an `index.html`
+   1. lets borrow from the [Minima](https://) theme, specifically `home.html` and place it in our newly created `index.html`; we will be overriding the `default` layout
+   1. update index.markdown to point to the new layout in the front matter.
+
+   change `layout:default` to `layout:index`
+
+   1. Copy `Hacker's` [default layout theme](https://github.com/pages-themes/hacker/blob/master/_layouts/default.html)
+   and edit it to alter how your main page shows up. Having our own altered version of the default layout will override GitHub's version.
 
 [img_create_repo]: /docs/images/2025_09_28_post_first_github_page/create_repo.png
 [img_jekyll_blank]: /docs/images/2025_09_28_post_first_github_page/new_jekyll_creation.png
 [img_local_server]: /docs/images/2025_09_28_post_first_github_page/serving_site_locally.png
+[img_jekyll_serve_fail]: /docs/images/2025_09_28_post_first_github_page/jekyll_serve_fail.png
