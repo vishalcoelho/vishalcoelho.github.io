@@ -17,6 +17,7 @@ Ever wonder how people create blogs and posts in the blink of an eye? Well, now 
 - [Using Jekyll to create a barebones page](#using-jekyll-to-create-a-barebones-page)
 - [Visualizing changes locally](#visualizing-changes-locally)
 - [Using different themes](#using-different-themes)
+- [Conclusion](#conclusion)
 
 ---
 
@@ -105,15 +106,17 @@ You can find more themes at [GitHub Pages Themes](https://docs.github.com/en/pag
 
 1. Change theme from the default `minima` to `jekyll-theme-<theme>`. For example, if i wanted to change to the hacker theme, the line would look like
 
-```theme: jekyll-theme-hacker```
+    ```ruby
+    theme: jekyll-theme-hacker
+    ```
 
 1. This alone isn't sufficient to render locally
 
-![Fail to use theme locally][img_jekyll_serve_fail]
+    ![Fail to use theme locally][img_jekyll_serve_fail]
 
-It is complaining about layouts `page`, `home` not existing. `hacker` only supports the `default` and `post` layouts (check the _layout folder in the theme's repository)
+    It is complaining about layouts `page`, `home` not existing. `hacker` only supports the `default` and `post` layouts (check the _layout folder in the theme's repository).
 
-So, change all `home` & `page` -> `default`
+    So, change all `home` & `page` -> `default`
 
 1. We are missing the links `about`, `contact`, so how do we customize this theme?
    1. create a new folder `_layouts` where we  will override the theme. Create an `index.html`
@@ -122,8 +125,12 @@ So, change all `home` & `page` -> `default`
 
    change `layout:default` to `layout:index`
 
-   1. Copy `Hacker's` [default layout theme](https://github.com/pages-themes/hacker/blob/master/_layouts/default.html)
-   and edit it to alter how your main page shows up. Having our own altered version of the default layout will override GitHub's version.
+1. Copy `Hacker's` [default layout theme](https://github.com/pages-themes/hacker/blob/master/_layouts/default.html)
+and edit it to alter how your main page shows up. Having our own altered version of the default layout will override GitHub's version.
+
+# Conclusion
+
+Each jekyll theme has a GitHub page which you can use as a template for your own website. Add and subtract parts as necessary.
 
 [img_create_repo]: /assets/images/2025_09_28_post_first_github_page/create_repo.png
 [img_jekyll_blank]: /assets/images/2025_09_28_post_first_github_page/new_jekyll_creation.png
