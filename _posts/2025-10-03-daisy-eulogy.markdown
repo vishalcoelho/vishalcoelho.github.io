@@ -85,8 +85,8 @@ categories: personal
         backyard critter but, most of all, we miss her unfailing greeting and love when we got home
         from work or school.
     </p>
-    <p>She was the greatest audience to my son as he practiced at the piano; she sat
-        in resolute silence, front paws folded upon each other as he went through his
+    <p>She was the greatest audience to our son as he practiced at the piano; she sat
+        in resolute silence, front paws crossed over each other as he went through his
         repertoire. She always alerted us to visitors, be they two or four legged, nothing
         escaped her notice.
     </p>
