@@ -1,7 +1,6 @@
 ---
-layout: default #page
-title: About
 permalink: /about/
+title: "About"
 ---
 
 <div class="resume" style="height:600px;">

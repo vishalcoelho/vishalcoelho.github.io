@@ -1,11 +1,13 @@
 ---
-layout: post
+layout: posts
 title:  "Creating your first GitHub page with Jekyll"
 date:   2025-09-28 21:31:00 -0500
 categories: github jekyll
 ---
 <!-- excerpts go here, right after the front matter -->
 Ever wonder how people create blogs and posts in the blink of an eye? Well, now you can too!!! using GitHub pages and Jekyll, create your very first blog in under an hour--well, maybe two--and amaze your friends and family and dog with your new found skills.
+
+---
 
 # Table of Contents <!-- omit in toc -->
 
@@ -69,7 +71,7 @@ We are going to force jekyll to create a page in our github webpage repository, 
                margin-left: auto;
                margin-right: auto;
                width = 30%;"
-        src="/docs/images/2025_09_28_post_first_github_page/new_jekyll_creation.png">
+        src="/assets/images/2025_09_28_post_first_github_page/new_jekyll_creation.png">
 
 1. Edit the *Gemfile*:
    1. comment `gem "jekyll", "~> 4.4.1"` as GitHub is currently pinned to v3
@@ -123,7 +125,7 @@ So, change all `home` & `page` -> `default`
    1. Copy `Hacker's` [default layout theme](https://github.com/pages-themes/hacker/blob/master/_layouts/default.html)
    and edit it to alter how your main page shows up. Having our own altered version of the default layout will override GitHub's version.
 
-[img_create_repo]: /docs/images/2025_09_28_post_first_github_page/create_repo.png
-[img_jekyll_blank]: /docs/images/2025_09_28_post_first_github_page/new_jekyll_creation.png
-[img_local_server]: /docs/images/2025_09_28_post_first_github_page/serving_site_locally.png
-[img_jekyll_serve_fail]: /docs/images/2025_09_28_post_first_github_page/jekyll_serve_fail.png
+[img_create_repo]: /assets/images/2025_09_28_post_first_github_page/create_repo.png
+[img_jekyll_blank]: /assets/images/2025_09_28_post_first_github_page/new_jekyll_creation.png
+[img_local_server]: /assets/images/2025_09_28_post_first_github_page/serving_site_locally.png
+[img_jekyll_serve_fail]: /assets/images/2025_09_28_post_first_github_page/jekyll_serve_fail.png
