@@ -16,6 +16,7 @@ Ever wonder how people create blogs and posts in the blink of an eye? Well, now 
 - [Create a Blank Repository on GitHub](#create-a-blank-repository-on-github)
 - [Using Jekyll to create a barebones page](#using-jekyll-to-create-a-barebones-page)
 - [Visualizing changes locally](#visualizing-changes-locally)
+- [Overriing a theme's design](#overriing-a-themes-design)
 - [Using different themes](#using-different-themes)
 - [Conclusion](#conclusion)
 
@@ -100,6 +101,17 @@ Run `bundle exec jekyll serve` to serve up the site locally, and `Ctrl+C` to shu
    ![Host site on local server][img_local_server]
 
 
+# Overriing a theme's design
+
+Run `bundle info --path <theme>` to reveal where that particular theme's gem was installed on your local machine. For
+example, `bundle info --path minimal-mistakes` shows us where the minimal-mistakes theme is installed
+
+ *C:/Ruby34-x64/lib/ruby/gems/3.4.0/gems/minimal-mistakes-jekyll-4.27.3*
+
+![Minimal Mistakes theme directory][img_minimal_mistakes_theme]
+
+If I wanted to change the design of the posts, I simply override it by including my own *_layout/posts.html* in my GitHub repository. Any local html files supercede the default ones packaged in the theme's gem.
+
 # Using different themes
 
 You can find more themes at [GitHub Pages Themes](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll). To use a theme simply edit the _config.yml
@@ -136,3 +148,4 @@ Each jekyll theme has a GitHub page which you can use as a template for your own
 [img_jekyll_blank]: /assets/images/2025_09_28_post_first_github_page/new_jekyll_creation.png
 [img_local_server]: /assets/images/2025_09_28_post_first_github_page/serving_site_locally.png
 [img_jekyll_serve_fail]: /assets/images/2025_09_28_post_first_github_page/jekyll_serve_fail.png
+[img_minimal_mistakes_theme]: /assets/images/2025_09_28_post_first_github_page/minimal_mistakes_theme.png

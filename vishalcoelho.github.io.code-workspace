@@ -2,6 +2,9 @@
     "folders": [
         {
             "path": "."
+        },
+        {
+            "path": "../../../../Ruby34-x64/lib/ruby/gems/3.4.0/gems/minimal-mistakes-jekyll-4.27.3"
         }
     ]
 }
