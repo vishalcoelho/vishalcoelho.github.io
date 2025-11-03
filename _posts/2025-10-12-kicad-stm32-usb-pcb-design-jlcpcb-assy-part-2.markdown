@@ -1,9 +1,9 @@
 ---
 layout: posts
-title:  "First STM32 PCB Design in KiCad and JLCPCB Assembly"
+title:  "First STM32 PCB Design in KiCad and JLCPCB Assembly: Part I"
 date:   2025-10-12 14:26:00 -0500
 categories: kicad pcb-design
-hidden:true
+hidden:false
 ---
 <!-- excerpts go here, right after the front matter -->
 These are my notes from following [Phil's Lab Tutorial](https://www.youtube.com/watch?v=C7-8nUU6e3E) on designing your
@@ -23,7 +23,11 @@ first PCB in KiCad 9.0 and using JLCPCB as the assembly house.
     - [STM32F405](#stm32f405)
     - [Crystal Resonator](#crystal-resonator)
     - [Organize by Sections](#organize-by-sections)
+  - [Microcontroller](#microcontroller)
   - [Power](#power)
+  - [Connectors](#connectors)
+- [Electrical Rules Check](#electrical-rules-check)
+- [Assigning Component Footprints](#assigning-component-footprints)
 - [Conclusion](#conclusion)
 
 ---
@@ -68,7 +72,7 @@ routing around the board more efficient. To that end,
 1. We want the following functionality
    1. System Core
       1.  SYS -> Debug: Trace Asynchronous Sw (allows for printf debugging)
-      1. RCC -> HSE: Crystal Resonator
+   ****   1. RCC -> HSE: Crystal Resonator
       1. RCC -> LSE: Crystal Resonator (Real Time Clock Source)
    1. Connectivity
       1. USB_OTG_FS -> Device_Only
@@ -131,9 +135,19 @@ $C_{stray}$ - stray capacitance of the micro, probably 5 or 6uF.
 > :memo: The feed resistor isn't always needed; it limits how much current the micro drives into the crystal. Too high and you overdrive the crystal and generator harmonics (bad!!)
 
 ### Organize by Sections
+We will cordon off different parts of the board into named sections by corralling components that serve a similar purpose and drawing a rectangle around them.
+
+## Microcontroller
+
 Add the status LED circuit and cordon off what we've drawn with a rectangle in the lower left quadrant of the sheet. Mark it as the microcontroller section.
 
 ![Microcontroller Section][img_kicad_micro_section]
+
+Note the pullups on the I2C lines
+![I2C Pullups][img_i2c_pullup]
+For a 3.3V rail, fast-mode I2C, use 2.2 K$\Omega$
+
+> :warning: Make sure you aren't using external pullups, on a breakout board perhaps!
 
 ## Power
 We are going to be using this [step-down switch mode converter][lnk_dc_dc] that JLCPCB supports. There is a schematic reference in the datasheet that we will follow.
@@ -148,6 +162,7 @@ KiCAD does not have this part so we are going to have to make it ourselves.
     ![Library Properties][img_kicad_library_properties]
     and
     1.  add a new Fields, `Symbol` with the part name and check the `Show` box
+    1. Set Value to the part designation, MP2359BJ-LF-Z (not shown in image)
     1. Set the footprint to TSOT-23-6
 1. Using the `Draw Pins` (P) tool add the 6 pins to the part
 1. Draw a bounding box (Rectangle) around the part
@@ -161,12 +176,86 @@ We need >1.2V but less than the max 6V at the BUCK_EN pin, so we use a resistor 
 
 Now we add a boost cap (10uF) between `BUCK_BST` and `BUCK_SW`. Next, we are going to be using the [B5819W Shottky diode][lnk_shottky] and an inductor at the switch (`BUCK_SW`) pin; the value of the inductor is specified in the datasheet of the buck converter.
 
-Lastly, we add the feedback resistor divider chain. The value for these resistors can be calculated from the datasheet.
+Next, add the feedback resistor divider chain. The value for these resistors can be calculated from the datasheet.
+
+Finally, We add a power indication LED to complete the power section of this board.
 
 ![Power Circuitry][img_kicad_power_circuitry]
 
-# Conclusion
+## Connectors
 
+Next we will add all the connectors
+    ![Connectors][img_connector_section]
+
+1. Add a two port screw terminal for mains
+1. Add a debug port: `A` (Add part) -> Search `Conn_02x05` -> `Odd_Even` footprint
+
+   > :bulb: Add current limiting (22$\Omega$) resistors to the signal pins: the `SWDIO`, `SWDCLK` are on an external rail so if someone accidentally shorts VCC to ground on the connector, the resistors should limit the short circuit current flowing through the path
+
+1. Add an RC filter to the `NRST` line to debounce glitchiness on the line.
+1. Add 1x4 connectors for both I2C and USART with current limiting resistors on the signal lines.
+1. Add a USB Micro connector
+   1. Leave shield floating.
+
+   > :bulb: Normally, you would connect it to ground through an RC filter when using a metallic enclosure
+
+   1. Add in the ESD protection in the form of the `USBLC6-2` (a bunch of TVS diodes). It is a good idea as this is the most frequently connected/disconnected plug on the board; humans tend to carry static around and it will make its way to the micro without ESD diodes.
+    > :bulb: The ESD diodes shunt any current spikes back to the supply rail.
+
+   1. We can also power the board from the USB but we shouldn't power it from the Power connector at the same time. To prevent a catastrophic situation we will add an OR gate (of sorts) at the 12V rail
+
+    ![Choosing one power supply][img_or_gate_power_supplies ]
+
+    If the 12V rail is active, it will reverse bias D3 and prevent the USB from powering the board.
+
+    1. We NC the ID pin as we are using this as a USB device and not a host
+
+    > :bulb: see [STM32 USB hardware and PCB guidelines][lnk_stm_usb] for more information on which micros include pull-up resistors, series termination resistors, etc. For the chip used in this design we dont need pull-ups or termination resistors
+
+1. Finally, add four mounting holes with pads and ground them
+
+# Electrical Rules Check
+
+Next step is to run the *Electricals Rule Checker*. On the top ribbon you will find the icon for the ERC, click it.
+
+![Electrical Rules Checker][img_electrical_rules_checker]
+
+When you run the ERC you will see something like this
+
+![ERC run][img_erc_run]
+
+Clicking on any of the violations zones in on the location in the schematic
+
+These errors are due to the fact that the 12, 3.3 and 3.3A rails are inputs with nothing feeding it, i.e. there aren't any output pins feeding these voltages. We can safely *delete these markers*.
+
+> :memo: You will notice that it isn't complaining about the 5V rail as it is being driven by the USB chip.
+
+# Assigning Component Footprints
+
+Click the *Assign Footprints* icon to begin assigning footprints to all of the components
+
+![Assign Footprints Icon][img_assign_footprints]
+
+> :memo: A *footprint* is the top layer copper, solder resist and silkscreen for each component.
+
+Lets say we were assigning the footprint of a 2.2$\mu$F capcacitor
+1. Go to JLCPCB -> Account -> Parts Manager -> JLCPCB parts
+1. Search for 2.2$\mu$F -> Filter on *Basic* parts
+1. Click on the basic parts to see the available footprints as well as the rated voltages
+1. Assign the corresponding footprint in the editor
+
+> :bulb: Clicking on any entry takes you to the location of the part on the schematic
+
+> :bulb: For the power section assign larger 1206 components
+
+After assigning all the footprints it should look like this:
+
+![Assigned Footprints][img_assigned_footprints.png]
+
+Click `Apply, Save Schematic & Continue`
+
+# Conclusion
+At this point our schematic is complete and we are ready to move on to generating a netlist and working on our gerber.
 
 <!-- References -->
 [lnk_jlcpb]: https://jlcpcb.com/
@@ -181,6 +270,8 @@ Lastly, we add the feedback resistor divider chain. The value for these resistor
 [lnk_rev_pol]: https://youtu.be/IrB-FPcv1Dc?si=IqBguDkFSW-D_ow1
 [lnk_p_mosfet]: https://jlcpcb.com/partdetail/Alpha_OmegaSemicon-AO3401A/C15127
 [lnk_shottky]: https://jlcpcb.com/partdetail/MDD_Microdiode_Semiconductor-B5819W/C64885
+[lnk_stm_usb]: https://www.st.com/resource/en/application_note/an4879-introduction-to-usb-hardware-and-pcb-guidelines-using-stm32-mcus-stmicroelectronics.pdf
+
 
 [img_basic_extended_parts]: /assets/images/2025_10_12_post_kicad_pcb_design/basic_extended_parts.png
 [img_stm32cubemx_new_project]: /assets/images/2025_10_12_post_kicad_pcb_design/stm32cubemx_new_project.png
@@ -198,4 +289,12 @@ Lastly, we add the feedback resistor divider chain. The value for these resistor
 [img_kicad_micro_section]: /assets/images/2025_10_12_post_kicad_pcb_design/kicad_micro_section.png
 [img_kicad_create_new_symbol]: /assets/images/2025_10_12_post_kicad_pcb_design/kicad_create_new_symbol.png
 [img_kicad_library_properties]: /assets/images/2025_10_12_post_kicad_pcb_design/kicad_library_properties.png
+[img_connector_section]: /assets/images/2025_10_12_post_kicad_pcb_design/connector_section.png
 [img_kicad_power_circuitry]: /assets/images/2025_10_12_post_kicad_pcb_design/kicad_power_circuitry.png
+[img_i2c_pullup]: /assets/images/2025_10_12_post_kicad_pcb_design/i2c_pullup.png
+[img_or_gate_power_supplies]: /assets/images/2025_10_12_post_kicad_pcb_design/or_gate_power_supplies.png
+[img_electrical_rules_checker]: /assets/images/2025_10_12_post_kicad_pcb_design/electrical_rules_checker.png
+[img_erc_run]: /assets/images/2025_10_12_post_kicad_pcb_design/erc_run.png
+[img_assign_footprints]: /assets/images/2025_10_12_post_kicad_pcb_design/assign_footprints.png
+[img_jlcpcb_available_footprints]: /assets/images/2025_10_12_post_kicad_pcb_design/jlcpcb_available_footprints.png
+[img_assigned_footprints.png]: /assets/images/2025_10_12_post_kicad_pcb_design/assigned_footprints.png
