@@ -1,6 +1,6 @@
 ---
 layout: posts
-title:  "First STM32 PCB Design in KiCad and JLCPCB Assembly: Part I"
+title:  "First STM32 PCB Design in KiCad and JLCPCB Assembly: Part I - Schematic Layout"
 date:   2025-10-12 14:26:00 -0500
 categories: kicad pcb-design
 hidden: false
@@ -255,7 +255,7 @@ After assigning all the footprints it should look like this:
 Click `Apply, Save Schematic & Continue`
 
 # Conclusion
-At this point our schematic is complete and we are ready to move on to generating a netlist and working on our gerber.
+At this point our schematic is complete and we are ready to move on to generating a NetList and working on our gerber.
 
 <!-- References -->
 [lnk_jlcpb]: https://jlcpcb.com/
